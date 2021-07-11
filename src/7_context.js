@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+
+const Context = React.createContext();
 
 function App() {
   return (
-    <div className="App">
-      <Child value={1} />
-    </div>
+    <Context.Provider value={[1, "Hello"]}>
+      <div className="App">
+        <Child />
+      </div>
+    </Context.Provider>
   );
 }
 
 function Child(props) {
-  return <GrandChild value={props.value} />;
+  return <GrandChild />;
 }
 
 function GrandChild(props) {
-  return <h1>{props.value}</h1>;
+  const value = useContext(Context);
+  console.log(value);
+  return <h1>{value}</h1>;
 }
 
 export default App;
